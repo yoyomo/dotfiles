@@ -50,3 +50,9 @@ map <leader><right> gt
 "New tabs
 map <leader>t :tabnew<Enter>
 map <leader>T :Te<Enter>
+
+"Save
+map <leader>s :w<Enter>
+
+"Quit screen
+map <leader>q :q<Enter>
