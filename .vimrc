@@ -16,6 +16,7 @@ set undodir=/tmp//
 
 "Colors
 colorscheme desert
+let g:indentLine_color_term = 239
 
 "Tabs
 set expandtab
