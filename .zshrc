@@ -13,6 +13,18 @@ alias fp='ps aux -ww | ag $1'
 alias gs='git status -s'
 alias ctags="`brew --prefix`/bin/ctags"
 
+unalias gp
+gp() {
+
+  if [ $# -eq 0 ]; then
+    echo "Usage: gp [message]"
+    return
+  fi
+  git add .
+  git commit -m "$@"
+  git push origin head
+}
+
 alias gi='git log --all --oneline --color --decorate'
 alias gg='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short --decorate'
 alias glo='git log --oneline --no-merges master..'
