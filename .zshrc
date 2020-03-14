@@ -17,11 +17,15 @@ unalias gp
 gp() {
 
   if [ $# -eq 0 ]; then
-    echo "Usage: gp [message]"
+    echo "Usage: gp MESSAGE"
     return
   fi
+
+  message=$@
+
+  git commit --all --short
   git add .
-  git commit -m "$@"
+  git commit -m "$message"
   git push origin head
 }
 
