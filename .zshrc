@@ -29,6 +29,10 @@ gp() {
   git push origin head
 }
 
+track(){
+  git branch --set-upstream-to=origin/$(current_branch)
+}
+
 alias gi='git log --all --oneline --color --decorate'
 alias gg='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short --decorate'
 alias glo='git log --oneline --no-merges master..'
