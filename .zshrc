@@ -50,6 +50,7 @@ gp() {
   message=$@
 
   git commit --all --short
+  git --no-pager diff --stat
   git add .
   git commit -m "$message"
   git push origin head
