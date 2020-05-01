@@ -37,6 +37,7 @@ alias rc="rails c"
 alias gs="git status -s"
 alias gd="git diff"
 alias gds="git --no-pager diff --stat"
+alias gsd="gds"
 alias wip="git add .; git commit -m 'wip'; git push origin head"
 
 unalias gp
