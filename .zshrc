@@ -60,5 +60,13 @@ track(){
   git branch --set-upstream-to=origin/$(current_branch)
 }
 
+pkg_v() {
+  echo $(cat package.json \
+    | grep version \
+    | head -1 \
+    | awk -F: '{ print $2 }' \
+    | sed 's/[",]//g')
+}
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
