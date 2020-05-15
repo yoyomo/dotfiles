@@ -26,6 +26,10 @@ fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
+export PATH="$HOME/.nodeenv/bin:$PATH"
+eval "$(nodenv init -)"
+
+
 alias ls=lsd
 alias la="ls -lah"
 alias l="la"
