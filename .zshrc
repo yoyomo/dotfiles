@@ -44,6 +44,8 @@ alias gds="git --no-pager diff --stat"
 alias gsd="gds"
 alias wip="git add .; git commit -m 'wip'; git push origin head"
 
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+
 unalias gp
 gp() {
 
@@ -72,7 +74,7 @@ gu() {
     return
   fi
 
-  current_branch = $(current_branch)
+  current_branch=$(current_branch)
 
   parent=$@
 
