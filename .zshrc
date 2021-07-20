@@ -65,6 +65,23 @@ track(){
   git branch --set-upstream-to=origin/$(current_branch)
 }
 
+gu() {
+
+  if [ $# -eq 0 ]; then
+    echo "Usage: gu BRANCH"
+    return
+  fi
+
+  current_branch = $(current_branch)
+
+  parent=$@
+
+  git checkout $parent
+  git pull
+  git checkout $current_branch
+  git merge $parent
+}
+
 pkg_v() {
   echo $(cat package.json \
     | grep version \
