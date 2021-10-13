@@ -29,6 +29,8 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.nodeenv/bin:$PATH"
 eval "$(nodenv init -)"
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 
 alias ls=lsd
 alias la="ls -lah"
@@ -94,6 +96,3 @@ pkg_v() {
     | awk -F: '{ print $2 }' \
     | sed 's/[",]//g')
 }
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
