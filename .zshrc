@@ -49,7 +49,7 @@ alias wip="git add .; git commit -m 'wip'; git push origin head"
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
 # Copies the first file of a Git Merge Conflict
-alias gmc="gs | grep UU | head -n 1 | cut -c 4- | pbcopy | pbpaste"
+alias gmc="gs | grep UU | head -n 1 | cut -c 4- | pbcopy; pbpaste"
 
 unalias gp
 gp() {
