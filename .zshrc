@@ -96,3 +96,7 @@ pkg_v() {
     | awk -F: '{ print $2 }' \
     | sed 's/[",]//g')
 }
+
+# To download playlist call `yt -i PLAYLIST_ID`
+# To download video call `yt VIDEO_ID`
+alias yt="time yt-dlp --download-archive ../downloaded.txt --merge-output-format mp4 -f \"bestvideo+bestaudio[ext=m4a]/best\" --embed-thumbnail --add-metadata --compat-options embed-thumbnail-atomicparsley -x --audio-format m4a"
