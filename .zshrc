@@ -1,4 +1,6 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.deno/bin:$PATH
+export GOPATH=$HOME/.go
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -101,6 +103,8 @@ pkg_v() {
     | awk -F: '{ print $2 }' \
     | sed 's/[",]//g')
 }
+
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # To download playlist call `yt -i PLAYLIST_ID`
 # To download video call `yt VIDEO_ID`
