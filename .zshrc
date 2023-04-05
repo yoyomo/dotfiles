@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
 export GOPATH=$HOME/.go
@@ -109,3 +111,6 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # To download playlist call `yt -i PLAYLIST_ID`
 # To download video call `yt VIDEO_ID`
 alias yt="time yt-dlp --download-archive ../downloaded.txt --merge-output-format mp4 -f \"bestvideo+bestaudio[ext=m4a]/best\" --embed-thumbnail --add-metadata --compat-options embed-thumbnail-atomicparsley -x --audio-format m4a"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
