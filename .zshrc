@@ -93,6 +93,7 @@ gu() {
   git merge $parent
 }
 alias gup="gu pre-production"
+alias gum="gu master"
 
 pkg_v() {
   echo $(cat package.json \
