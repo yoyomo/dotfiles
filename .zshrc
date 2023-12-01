@@ -25,7 +25,6 @@ if [ $USE_NODE ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
   export PATH="$HOME/.nodeenv/bin:$PATH"
-  eval "$(nodenv init -)"
 fi
 
 if [ $USE_RUBY ]; then  
@@ -34,7 +33,6 @@ if [ $USE_RUBY ]; then
   fi
 
   export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
 
   # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
   export PATH="$PATH:$HOME/.rvm/bin"
