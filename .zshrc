@@ -1,8 +1,17 @@
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+export PATH=/opt/homebrew/bin:$PATH
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
 export GOPATH=$HOME/.go
+
+# pnpm
+export PNPM_HOME="/Users/mando/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -12,6 +21,7 @@ ZSH_THEME="mrtazz" # set by `omz`
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.iterm2_shell_integration.zsh
 
 alias fp='ps aux -ww | ag $1'
 alias ctags="`brew --prefix`/bin/ctags"
@@ -19,27 +29,12 @@ alias gi='git log --all --oneline --color --decorate'
 alias gg='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short --decorate'
 alias glo='git log --oneline --no-merges master..'
 
-if [ $USE_NODE ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-  export PATH="$HOME/.nodeenv/bin:$PATH"
-  eval "$(nodenv init -)"
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-if [ $USE_RUBY ]; then  
-  if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-    source $HOME/.rvm/scripts/rvm;
-  fi
-
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-
-  # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-  export PATH="$PATH:$HOME/.rvm/bin"
-fi
-
+eval "$(rbenv init - zsh)"
 
 alias ls=lsd
 alias la="ls -lah"
@@ -112,5 +107,10 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # To download video call `yt VIDEO_ID`
 alias yt="time yt-dlp --download-archive ../downloaded.txt --merge-output-format mp4 -f \"bestvideo+bestaudio[ext=m4a]/best\" --embed-thumbnail --add-metadata --compat-options embed-thumbnail-atomicparsley -x --audio-format m4a"
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
