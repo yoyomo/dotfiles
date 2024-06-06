@@ -30,13 +30,6 @@ alias gi='git log --all --oneline --color --decorate'
 alias gg='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short --decorate'
 alias glo='git log --oneline --no-merges master..'
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-eval "$(rbenv init - zsh)"
-
 alias ls=lsd
 alias la="ls -lah"
 alias l="la"
@@ -111,6 +104,9 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # To download playlist call `yt -i PLAYLIST_ID`
 # To download video call `yt VIDEO_ID`
 alias yt="time yt-dlp --download-archive ../downloaded.txt --merge-output-format mp4 -f \"bestvideo+bestaudio[ext=m4a]/best\" --embed-thumbnail --add-metadata --compat-options embed-thumbnail-atomicparsley -x --audio-format m4a"
+
+# Count the number of files
+alias count="ls -1 | wc -l"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
