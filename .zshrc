@@ -14,6 +14,16 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+eval "$(rbenv init - zsh)"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -46,6 +56,11 @@ alias wip="git add .; git commit -m 'wip'; git push origin head"
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias webstorm='open -na "WebStorm.app" --args "$@"'
+alias pycharm='open -na "PyCharm Professional Edition.app" --args "$@"'
+alias datagrip='open -na "DataGrip.app" --args "$@"'
+alias rubymine='open -na "RubyMine.app" --args "$@"'
+alias goland='open -na "GoLand.app" --args "$@"'
+alias rustrover='open -na "RustRover.app" --args "$@"'
 
 # Copies the first file of a Git Merge Conflict
 alias gmc="gs | grep UU | head -n 1 | cut -c 4- | pbcopy; pbpaste"
