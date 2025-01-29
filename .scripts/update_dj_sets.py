@@ -8,5 +8,5 @@ if not os.path.exists(dir_path):
     print(f"{dir_path} directory created")
 
 
-subprocess.run(['/bin/bash', '-i', '-c', "yt"])
-subprocess.run(['/bin/bash', '-i', '-c', "echo \"done!\""])
+subprocess.run(['/bin/bash', '-i', '-c', 'yt'])
+subprocess.run(['/bin/bash', '-i', '-c', 'echo "done!"'])
