@@ -111,7 +111,7 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias yt_base="time yt-dlp --merge-output-format mp4 -f \"bestvideo+bestaudio[ext=m4a]/best\" --embed-thumbnail --add-metadata --compat-options embed-thumbnail-atomicparsley -x --audio-format m4a"
 alias yt="yt_base --download-archive ../../downloaded.txt"
 
-alias update_dj_sets="python3 .scripts/update_dj_sets.py"
+alias update_dj_sets="python3 ~/.scripts/update_dj_sets.py"
 # Count the number of files
 alias count="ls -1 | wc -l"
 

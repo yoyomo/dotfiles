@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-os.chdir(os.path.expanduser('iCloudDrive/Music/DJ/genres'))
+os.chdir(os.path.expanduser('~/iCloudDrive/Music/DJ/genres'))
 dir_path = "gc"
 if not os.path.exists(dir_path):
     os.makedirs(dir_path)
