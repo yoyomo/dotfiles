@@ -27,11 +27,11 @@ playlists = [
     {"name": "ue | techno", "id": "PL4xpJlmNQtFoyjmHYJzv3WozV3zi88HEG"},
     {"name": "wc | ballad", "id": "PL4xpJlmNQtFpaQ6TDa74dsM73f-nHa0Zt"},
     {"name": "wc | chillhop", "id": "PL4xpJlmNQtFoCx4NUyRAdXEvEoAiFsDKD"},
-    {"name": "wc | indie cool", "id": "PL4xpJlmNQtFod5uq452L4MD_vGFoEQuFT"},
+    {"name": "wc | alt cool", "id": "PL4xpJlmNQtFod5uq452L4MD_vGFoEQuFT"},
     {"name": "wc | reggae", "id": "PL4xpJlmNQtFqTylKy0nL6RKP469zA4R6v"},
     {"name": "wc | rnb", "id": "PL4xpJlmNQtFqFX1GIdej4QyI9NHcrM8Ev"},
     {"name": "x | hiphop", "id": "PL4xpJlmNQtFrcjjKlPTjDMuD7QQuoY1Ue"},
-    {"name": "x | indie", "id": "PL4xpJlmNQtFpNYPZnuQsgNtfNPU6mPG6j"},
+    {"name": "x | alt", "id": "PL4xpJlmNQtFpNYPZnuQsgNtfNPU6mPG6j"},
     {"name": "x | phonk", "id": "PL4xpJlmNQtFqpWGL-OApxT_ruOdybzoTb"},
     {"name": "x | pop", "id": "PL4xpJlmNQtFonC2Eq96pBBB-lSCnBX_FP"},
 ]
