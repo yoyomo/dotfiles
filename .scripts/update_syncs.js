@@ -20,6 +20,9 @@ const individualSync = async (playlist) => {
     }
     document.querySelector(".schedule-starter").click() // click run now
     // wait till sync is done
+    while (!document.querySelector('span[title="Running"]')) {
+        await new Promise(r => setTimeout(r, 300));
+    }
     while (document.querySelector('span[title="Running"]')) {
         await new Promise(r => setTimeout(r, 1000));
     }
