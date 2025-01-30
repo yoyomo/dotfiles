@@ -34,7 +34,6 @@ playlists = [
     {"name": "x | indie", "id": "PL4xpJlmNQtFpNYPZnuQsgNtfNPU6mPG6j"},
     {"name": "x | phonk", "id": "PL4xpJlmNQtFqpWGL-OApxT_ruOdybzoTb"},
     {"name": "x | pop", "id": "PL4xpJlmNQtFonC2Eq96pBBB-lSCnBX_FP"},
-
 ]
 
 home_path = os.path.expanduser("~/iCloudDrive/Music/DJ/genres")
@@ -46,10 +45,13 @@ def go_to_dir(dir):
         print(f"{dir} directory created")
     os.chdir(dir)
 
-
 for playlist in playlists:
     os.chdir(home_path)
     [vibe_dir, genre_dir] = playlist["name"].split(" | ")
     go_to_dir(vibe_dir)
     go_to_dir(genre_dir)
-    subprocess.run(["/bin/bash", "-i", "-c", f"yt-dl -i {playlist['id']}"])
+    subprocess.run(["time", "yt-dlp" ,"--download-archive", "../../downloaded.txt",
+    "--merge-output-format", "mp4", "-S", "vcodec:h264,res,acodec:aac",
+    "--embed-thumbnail", "--add-metadata", "--compat-options", "embed-thumbnail-atomicparsley",
+    "-x", "--audio-format", "m4a",
+    "-i", playlist["id"]])
