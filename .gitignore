@@ -6,3 +6,4 @@
 !.vim
 !.makefile
 !.scripts
+.scripts/.*
