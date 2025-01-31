@@ -1,5 +1,7 @@
 // Paste this code in Soundiiz's Syncs page (https://soundiiz.com/webapp/scheduleds)
 
+const NUMBER_OF_PLAYLISTS = 32
+
 const prepareSync = () => {
     // Filter by last exec
     headers = Array.from(document.querySelectorAll(".filter-order-by-list-header"))
@@ -30,7 +32,7 @@ const individualSync = async (playlist) => {
     document.querySelector('button[title="Back"]').click() // close playlist
     // wait till it closes
     while (!document.querySelector(".main-line").innerText.includes("My synchronizations")) {
-        await new Promise(r => setTimeout(r, 1000));
+        await new Promise(r => setTimeout(r, 300));
     }
 }
 
@@ -48,7 +50,7 @@ const syncPlaylist = async () => {
 
 const main = async () => {
     prepareSync()
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < NUMBER_OF_PLAYLISTS; i++) {
         await syncPlaylist()
     }
 }
