@@ -45,13 +45,21 @@ def go_to_dir(dir):
         print(f"{dir} directory created")
     os.chdir(dir)
 
+updated_playlists = []
 for playlist in playlists:
     os.chdir(home_path)
     [vibe_dir, genre_dir] = playlist["name"].split(" | ")
     go_to_dir(vibe_dir)
     go_to_dir(genre_dir)
+    prev_file_count = len([file for file in os.listdir() if not file.startswith('.')])
     subprocess.run(["time", "yt-dlp" ,"--download-archive", "../../downloaded.txt",
     "--merge-output-format", "mp4", "-S", "vcodec:h264,res,acodec:aac",
     "--embed-thumbnail", "--add-metadata", "--compat-options", "embed-thumbnail-atomicparsley",
     "-x", "--audio-format", "m4a",
     "-i", playlist["id"]])
+    cur_file_count = len([file for file in os.listdir() if not file.startswith('.')])
+    if cur_file_count > prev_file_count:
+        updated_playlists.append(playlist["name"])
+
+updated_playlists_str = "\n".join(updated_playlists)
+print(f"Updated Playlists: {len(updated_playlists)}\n{updated_playlists_str}")

@@ -119,7 +119,7 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # To download playlist call `yt -i PLAYLIST_ID`
 # To download video call `yt VIDEO_ID`
 alias yt="time yt-dlp --download-archive ../../downloaded.txt --merge-output-format mp4 -f \"bestvideo+bestaudio[ext=m4a]/best\" --embed-thumbnail --add-metadata --compat-options embed-thumbnail-atomicparsley -x --audio-format m4a"
-alias update_playlists="python3 ~/.scripts/update_playlists.py"
+alias update_playlists="pytest ~/.scripts/update_playlists.py" # use --headed for debugging
 alias download_playlists="python3 ~/.scripts/download_playlists.py"
 # Count the number of files
 alias count="ls -1 | wc -l"
