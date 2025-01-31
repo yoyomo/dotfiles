@@ -1,10 +1,24 @@
-import re
-from playwright.sync_api import Page, expect
+# run this in your terminal 
+# /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir="~/Library/Application Support/Google/Chrome/Profile 1"
+# and sign in to your Soundiiz account
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-def test_has_title(page: Page):
-    page.goto("https://soundiiz.com/webapp/scheduleds")
+# Attach to running Chrome session
+options = webdriver.ChromeOptions()
+options.debugger_address = "127.0.0.1:9222"  # Connect to the open browser
 
-    # TODO: sign in by google 😬
-    expect(page).to_have_title(re.compile("Playwright"))
+driver = webdriver.Chrome(options=options)
+
+driver.get("https://soundiiz.com/webapp/scheduleds")  # Change this to your target site
+
+# Wait for an element to appear (like Playwright's wait_for_selector)
+wait = WebDriverWait(driver, 10)
+
+# Minimize the window (so it runs in the background)
+driver.minimize_window()
+print("Chrome is running in the background...")
 
 # TODO: Implement the update_syncs.js code in Python selenium
