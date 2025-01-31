@@ -124,7 +124,7 @@ alias download_playlists="python3 ~/.scripts/download_playlists.py"
 # Count the number of files
 alias count="ls -1 | wc -l"
 
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/ ~/iCloudDrive
+ln -sfn ~/Library/Mobile\ Documents/com~apple~CloudDocs/ ~/iCloudDrive
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
