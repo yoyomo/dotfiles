@@ -26,8 +26,8 @@ WebDriverWait(driver, 10).until(
 )
 
 # Minimize the window (so it runs in the background)
-# driver.minimize_window()
-# print("Chrome is running in the background...")
+driver.minimize_window()
+print("Chrome is running in the background...")
 
 # Filter by last exec
 headers = driver.find_elements(by=By.CSS_SELECTOR, value=".filter-order-by-list-header")
@@ -41,7 +41,7 @@ search_input.send_keys(" | ")
 for _ in range(len(playlists)):
     playlist = driver.find_element(by=By.CSS_SELECTOR, value=".list-row")
     playlist_title = playlist.find_element(by=By.CSS_SELECTOR, value=".item-title").text
-    print(f"Syncing {playlist_title}")
+    print(f"Syncing {playlist_title}...")
 
     playlist.click() # open playlist
 
@@ -58,6 +58,7 @@ for _ in range(len(playlists)):
     while True:
         try:
             driver.find_element(by=By.CSS_SELECTOR, value='span[title="Running"]')
+            time.sleep(1)
             continue
         except NoSuchElementException:
             break
@@ -72,4 +73,4 @@ for _ in range(len(playlists)):
     print(f"Sync done {playlist_title}")
 
 driver.quit()
-# chrome.terminate()
+chrome.terminate()
