@@ -9,8 +9,6 @@ from subprocess import Popen
 from constants import playlists
 import time
 
-NUM_OF_PLAYLISTS = len(playlists) # Change this to the number of playlists you want to sync
-
 chrome = Popen(["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "--remote-debugging-port=9222"])
 
 # Attach to running Chrome session
@@ -36,11 +34,16 @@ headers = driver.find_elements(by=By.CSS_SELECTOR, value=".filter-order-by-list-
 last_exec_filter = next(header for header in headers if header.text == "Last exec")
 last_exec_filter.click()
 
+# find common denominator in playlists names
+# in case playlists constant has been modified
+common = set.intersection(*(set(p["name"]) for p in playlists))
+search_string = list(common)[0] # usually |
+
 # Search all playlists
 search_input = driver.find_element(by=By.CSS_SELECTOR, value=".search-input")
-search_input.send_keys(" | ")
+search_input.send_keys(search_string)
 
-for _ in range(NUM_OF_PLAYLISTS):
+for _ in range(len(playlists)):
     playlist = driver.find_element(by=By.CSS_SELECTOR, value=".list-row")
     playlist_title = playlist.find_element(by=By.CSS_SELECTOR, value=".item-title").text
     print(f"Syncing playlist {playlist_title}...")
