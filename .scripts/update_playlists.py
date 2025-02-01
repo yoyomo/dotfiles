@@ -34,21 +34,14 @@ headers = driver.find_elements(by=By.CSS_SELECTOR, value=".filter-order-by-list-
 last_exec_filter = next(header for header in headers if header.text == "Last exec")
 last_exec_filter.click()
 
-# find common denominator in playlists names
-# in case playlists constant has been modified
-common = set.intersection(*(set(p["name"]) for p in playlists))
-search_string = list(common)[0] # usually |
-
-# Search all playlists
 search_input = driver.find_element(by=By.CSS_SELECTOR, value=".search-input")
-search_input.send_keys(search_string)
+# Search all playlists
+for playlist in playlists:
+    search_input.send_keys(playlist['name'])
+    playlist_el = driver.find_element(by=By.CSS_SELECTOR, value=".list-row")
+    print(f"Syncing playlist {playlist['name']}...")
 
-for _ in range(len(playlists)):
-    playlist = driver.find_element(by=By.CSS_SELECTOR, value=".list-row")
-    playlist_title = playlist.find_element(by=By.CSS_SELECTOR, value=".item-title").text
-    print(f"Syncing playlist {playlist_title}...")
-
-    playlist.click() # open playlist
+    playlist_el.click() # open playlist
 
     # wait until page loads
     WebDriverWait(driver, 10).until(
@@ -75,7 +68,7 @@ for _ in range(len(playlists)):
         EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".main-line"), "My synchronizations")
     )
 
-    print(f"Sync finished for {playlist_title}")
+    print(f"Sync finished for {playlist["name"]}")
 
 driver.quit()
 chrome.terminate()
