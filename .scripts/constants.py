@@ -1,4 +1,5 @@
 playlists = [
+    # genres
     {"name": "gc | african", "id": "PL4xpJlmNQtFob3k85b9DVLYBA6rD9CrVS"},
     {"name": "gc | bachata", "id": "PL4xpJlmNQtFquh8apCSAxGBprZv21Vijk"},
     {"name": "gc | country", "id": "PL4xpJlmNQtFqjV1GrkM6xpzZ5UOzxG4Sq"},
@@ -31,4 +32,6 @@ playlists = [
     {"name": "x | alt", "id": "PL4xpJlmNQtFpNYPZnuQsgNtfNPU6mPG6j"},
     {"name": "x | phonk", "id": "PL4xpJlmNQtFqpWGL-OApxT_ruOdybzoTb"},
     {"name": "x | pop", "id": "PL4xpJlmNQtFonC2Eq96pBBB-lSCnBX_FP"},
+    # sets
+    {"name": "set | matrix", "id": "PL4xpJlmNQtFpODcchd7IdefVZcxu17193"},
 ]
