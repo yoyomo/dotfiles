@@ -21,8 +21,7 @@ for playlist in playlists:
     go_to_dir(vibe_dir)
     go_to_dir(genre_dir)
     prev_file_count = len([file for file in os.listdir() if not file.startswith('.')])
-    subprocess.run(["time", "yt-dlp" , "--download-archive",
-    *(["downloaded.txt"] if vibe_dir == "sets" else ["../../downloaded.txt"]),
+    subprocess.run(["time", "yt-dlp" , "--download-archive", "downloaded.txt",
     "--merge-output-format", "mp4", "-S", "vcodec:h264,res,acodec:aac",
     "--embed-thumbnail", "--add-metadata", "--compat-options", "embed-thumbnail-atomicparsley",
     "-x", "--audio-format", "m4a",
