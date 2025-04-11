@@ -14,7 +14,7 @@ updated_playlists = []
 for playlist in playlists:
     [vibe_dir, genre_dir] = playlist["name"].split(" | ")
     if vibe_dir == "set":
-        vibe_dir = f"sets"
+        vibe_dir = "sets"
     else:
         vibe_dir = f"genres/{vibe_dir}"
     os.chdir(home_path)
