@@ -7,7 +7,7 @@ export GOPATH=$HOME/.go
 export HOMEBREW_AUTO_UPDATE_SECS=86400
 
 # pnpm
-export PNPM_HOME="/Users/mando/Library/pnpm"
+export PNPM_HOME="${HOME}/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -150,3 +150,4 @@ export PATH="$WASMTIME_HOME/bin:$PATH"
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
 
 eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
