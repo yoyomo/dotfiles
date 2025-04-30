@@ -18,6 +18,8 @@ chrome = Popen(["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 # Attach to running Chrome session
 options = webdriver.ChromeOptions()
 options.debugger_address = f"127.0.0.1:{PORT}"
+options.add_argument('--headless=new')
+options.add_argument('--window-size=1920,1080')
 driver = webdriver.Chrome(options=options)
 
 driver.get("https://soundiiz.com/webapp/scheduleds")
