@@ -35,4 +35,5 @@ playlists = [
     {"name": "x | pop", "id": "PL4xpJlmNQtFonC2Eq96pBBB-lSCnBX_FP"},
     # sets
     {"name": "set | matrix", "id": "PL4xpJlmNQtFpODcchd7IdefVZcxu17193"},
+    {"name": "set | wedding", "id": "PL4xpJlmNQtFr2yGDABdc0PZ03RFSGRZPR"},
 ]
