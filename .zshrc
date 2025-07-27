@@ -127,8 +127,11 @@ alias yt="time yt-dlp \
   --add-metadata \
   --compat-options embed-thumbnail-atomicparsley \
   -x --audio-format m4a"
-alias update_playlists="caffeinate -dims python3 ~/.scripts/update_playlists.py"
-alias download_playlists="caffeinate -dims python3 ~/.scripts/download_playlists.py"
+alias create_venv="python3 -m venv ~/.venv"
+alias enter_venv="source ~/.venv/bin/activate"
+alias exit_venv="deactivate"
+alias update_playlists="enter_venv; caffeinate -dims python3 ~/.scripts/update_playlists.py; exit_venv"
+alias download_playlists="enter_venv; caffeinate -dims python3 ~/.scripts/download_playlists.py; exit_venv"
 # Count the number of files
 alias count="ls -1 | wc -l"
 

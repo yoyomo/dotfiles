@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
-from subprocess import Popen
+from subprocess import Popen, DEVNULL
 from constants import playlists
 from selenium.webdriver.common.keys import Keys
 import time
@@ -13,17 +13,16 @@ import time
 PORT=9222
 
 chrome = Popen(["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-                f"--remote-debugging-port={PORT}"])
+                f"--remote-debugging-port={PORT}",
+                "--user-data-dir=/tmp/soundiiz-profile"
+], stdout=DEVNULL, stderr=DEVNULL)
 
 # Attach to running Chrome session
 options = webdriver.ChromeOptions()
 options.debugger_address = f"127.0.0.1:{PORT}"
-options.add_argument('--headless=new')
 options.add_argument('--window-size=1920,1080')
 driver = webdriver.Chrome(options=options)
-
 driver.get("https://soundiiz.com/webapp/scheduleds")
-
 driver.implicitly_wait(0.5)
 
 wait = WebDriverWait(driver, 10)
@@ -32,7 +31,7 @@ wait.until(
 )
 
 # Minimize the window (so it runs in the background)
-driver.minimize_window()
+# driver.minimize_window()
 print("Chrome is running in the background...")
 
 # Search all playlists
