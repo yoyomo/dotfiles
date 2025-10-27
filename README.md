@@ -14,4 +14,3 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 ### Dependencies
 brew install lsd
-brew install rbenv
