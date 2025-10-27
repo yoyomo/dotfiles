@@ -152,3 +152,8 @@ export PATH="$WASMTIME_HOME/bin:$PATH"
 
 eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/mandomac/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
