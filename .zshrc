@@ -24,6 +24,77 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="$(brew --prefix)/opt/python3/libexec/bin:$PATH"
 
+# Function to install Hack Nerd Font if not present
+install_hack_nerd_font() {
+  local font_name="Hack Nerd Font"
+  local font_dir="$HOME/Library/Fonts"
+  local temp_dir="/tmp/hack-nerd-font"
+  
+  # Check if Hack Nerd Font is already installed
+  if ls "$font_dir"/*Hack*Nerd*Font*.ttf >/dev/null 2>&1 || ls "$font_dir"/*HackNerdFont*.ttf >/dev/null 2>&1; then
+    return 0  # Font already installed
+  fi
+  
+  echo "Hack Nerd Font not found. Installing..."
+  
+  # Create temporary directory
+  mkdir -p "$temp_dir"
+  cd "$temp_dir"
+  
+  # Get the latest release version from GitHub API
+  echo "Fetching latest Hack Nerd Font version..."
+  local latest_version=""
+  nerd_font_url="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
+  if command -v curl >/dev/null 2>&1; then
+    latest_version=$(curl -s "$nerd_font_url" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+  elif command -v wget >/dev/null 2>&1; then
+    latest_version=$(wget -qO- "$nerd_font_url" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+  else
+    echo "Error: Neither curl nor wget found. Cannot download Hack Nerd Font."
+    return 1
+  fi
+  
+  if [[ -z "$latest_version" ]]; then
+    echo "Error: Could not fetch latest version. Using fallback version v3.1.1"
+    latest_version="v3.1.1"
+  else
+    echo "Latest version found: $latest_version"
+  fi
+  
+  # Download latest Hack Nerd Font release
+  local download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${latest_version}/Hack.zip"
+  
+  echo "Downloading Hack Nerd Font ${latest_version}..."
+  if command -v curl >/dev/null 2>&1; then
+    curl -L -o hack-nerd-font.zip "$download_url"
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O hack-nerd-font.zip "$download_url"
+  else
+    echo "Error: Neither curl nor wget found. Cannot download Hack Nerd Font."
+    return 1
+  fi
+  
+  # Extract and install fonts
+  if command -v unzip >/dev/null 2>&1; then
+    unzip -q hack-nerd-font.zip
+    # Install all TTF files (Hack Nerd Font files)
+    cp *.ttf "$font_dir/" 2>/dev/null || true
+    echo "Hack Nerd Font installed successfully!"
+    echo "Available variants: Regular, Bold, Italic, Bold Italic"
+    echo "Font name in applications: 'Hack Nerd Font' or 'HackNerdFont'"
+  else
+    echo "Error: unzip command not found. Cannot extract font files."
+    return 1
+  fi
+  
+  # Cleanup
+  cd - >/dev/null
+  rm -rf "$temp_dir"
+}
+
+# Install Hack Nerd Font if not present
+install_hack_nerd_font
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
