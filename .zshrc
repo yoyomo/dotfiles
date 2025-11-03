@@ -95,6 +95,44 @@ install_hack_nerd_font() {
 # Install Hack Nerd Font if not present
 install_hack_nerd_font
 
+# Function to install Pathogen for Vim if not present
+install_pathogen() {
+  local vim_autoload_dir="$HOME/.vim/autoload"
+  local vim_bundle_dir="$HOME/.vim/bundle"
+  local pathogen_file="$vim_autoload_dir/pathogen.vim"
+  
+  # Check if Pathogen is already installed
+  if [[ -f "$pathogen_file" ]]; then
+    return 0  # Pathogen already installed
+  fi
+  
+  echo "Pathogen not found. Installing Vim Pathogen..."
+  
+  # Create necessary directories
+  mkdir -p "$vim_autoload_dir" "$vim_bundle_dir"
+  
+  # Download Pathogen
+  if command -v curl >/dev/null 2>&1; then
+    curl -LSso "$pathogen_file" https://tpo.pe/pathogen.vim
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O "$pathogen_file" https://tpo.pe/pathogen.vim
+  else
+    echo "Error: Neither curl nor wget found. Cannot download Pathogen."
+    return 1
+  fi
+  
+  if [[ -f "$pathogen_file" ]]; then
+    echo "Pathogen installed successfully!"
+    echo "Your .vimrc should now work without errors."
+  else
+    echo "Error: Failed to download Pathogen."
+    return 1
+  fi
+}
+
+# Install Pathogen if not present
+install_pathogen
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
