@@ -148,6 +148,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias gi='git log --all --oneline --color --decorate'
 alias gg='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short --decorate'
 alias glo='git log --oneline --no-merges master..'
+alias gl="track; git pull"
 
 alias ls=lsd
 alias la="ls -lah"
@@ -192,7 +193,15 @@ gp() {
 }
 
 track(){
-  git branch --set-upstream-to=origin/$(current_branch)
+  local current=$(current_branch)
+  local expected_upstream="origin/$current"
+  local actual_upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+  
+  # Only set upstream if it's not already correct
+  if [[ "$actual_upstream" != "$expected_upstream" ]]; then
+    echo "Setting upstream: $current -> $expected_upstream"
+    git branch --set-upstream-to=origin/$current
+  fi
 }
 
 gu() {
