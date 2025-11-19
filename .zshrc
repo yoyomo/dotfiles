@@ -1,5 +1,18 @@
 # CodeWhisperer pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
+
+# Auto-install Homebrew if not found
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Add brew to PATH for this session
+    if [[ -f "/opt/homebrew/bin/brew" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -f "/usr/local/bin/brew" ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+fi
+
 export PATH=/opt/homebrew/bin:$PATH
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
@@ -22,7 +35,10 @@ export NVM_DIR="$HOME/.nvm"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 
-export PATH="$(brew --prefix)/opt/python3/libexec/bin:$PATH"
+# Add python3 to PATH if brew is available
+if command -v brew &> /dev/null; then
+    export PATH="$(brew --prefix)/opt/python3/libexec/bin:$PATH"
+fi
 
 # Function to install Hack Nerd Font if not present
 install_hack_nerd_font() {
@@ -140,15 +156,42 @@ ZSH_THEME="mrtazz" # set by `omz`
 
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
-source ~/.iterm2_shell_integration.zsh
+# Auto-install oh-my-zsh if not found
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+    echo "Installing oh-my-zsh..."
+    KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+fi
+
+# Set ZSH variable if not set
+if [[ -z "$ZSH" ]]; then
+    export ZSH="$HOME/.oh-my-zsh"
+fi
+
+# Source oh-my-zsh if it exists
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
+
+# Auto-install iTerm2 shell integration if not found
+if [[ ! -f "$HOME/.iterm2_shell_integration.zsh" ]] && command -v curl &> /dev/null; then
+    echo "Installing iTerm2 shell integration..."
+    curl -L https://iterm2.com/shell_integration/zsh -o "$HOME/.iterm2_shell_integration.zsh"
+fi
+[[ -f "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
 alias fp='ps aux -ww | ag $1'
-alias ctags="`brew --prefix`/bin/ctags"
+# Set ctags alias if brew is available
+if command -v brew &> /dev/null; then
+    alias ctags="$(brew --prefix)/bin/ctags"
+fi
 alias gi='git log --all --oneline --color --decorate'
 alias gg='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short --decorate'
 alias glo='git log --oneline --no-merges master..'
 alias gl="track; git pull"
+
+# Auto-install lsd if not found and brew is available
+if ! command -v lsd &> /dev/null && command -v brew &> /dev/null; then
+    echo "Installing lsd..."
+    brew install lsd
+fi
 
 alias ls=lsd
 alias la="ls -lah"
@@ -175,7 +218,8 @@ alias rustrover='open -na "RustRover.app" --args "$@"'
 # Copies the first file of a Git Merge Conflict
 alias gmc="gs | grep UU | head -n 1 | cut -c 4- | pbcopy; pbpaste"
 
-unalias gp
+# Unalias gp if it exists
+[[ $(alias gp 2>/dev/null) ]] && unalias gp
 gp() {
 
   if [ $# -eq 0 ]; then
@@ -271,7 +315,18 @@ export PATH="$WASMTIME_HOME/bin:$PATH"
 # CodeWhisperer post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
 
-eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
+# Auto-install pkgx if not found
+if ! command -v pkgx &> /dev/null && command -v curl &> /dev/null; then
+    echo "Installing pkgx..."
+    curl -fsS https://pkgx.sh | sh
+    # Add pkgx to PATH for this session
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Load pkgx dev environment if available
+if command -v pkgx &> /dev/null; then
+    eval "$(pkgx --quiet dev --shellcode)"  # https://github.com/pkgxdev/dev
+fi
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/mandomac/.docker/completions $fpath)
