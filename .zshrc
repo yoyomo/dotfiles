@@ -17,6 +17,7 @@ export PATH=/opt/homebrew/bin:$PATH
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
 export GOPATH=$HOME/.go
+export PATH=$GOPATH/bin:$PATH
 export HOMEBREW_AUTO_UPDATE_SECS=86400
 
 # pnpm
