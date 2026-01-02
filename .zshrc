@@ -246,7 +246,7 @@ gp() {
 }
 
 track(){
-  local current=$(current_branch)
+  local current=$(git_current_branch)
   local expected_upstream="origin/$current"
   local actual_upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
   
@@ -264,7 +264,7 @@ gu() {
     return
   fi
 
-  current_branch=$(current_branch)
+  current_branch=$(git_current_branch)
 
   parent=$@
 
